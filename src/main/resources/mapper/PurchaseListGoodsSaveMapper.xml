@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.atguigu.jxc.dao.PurchaseListGoodsSaveDao">
+
+
+    <insert id="purchaseListGoodsSave" useGeneratedKeys="true" keyProperty="purchaseListId" parameterType="com.atguigu.jxc.entity.PurchaseListGoods">
+        INSERT INTO t_purchase_list_goods
+        (
+            goods_id,
+            goods_code,
+            goods_name,
+            goods_model,
+            goods_unit,
+            goods_num,
+            price,
+            total,
+            purchase_list_id,
+            goods_type_id
+        )
+        VALUES
+        (
+            #{goodsId},
+            #{goodsCode},
+            #{goodsName},
+            #{goodsModel},
+            #{goodsUnit},
+            #{goodsNum},
+            #{price},
+            #{total},
+            #{purchaseListGoodsId},
+            #{goodsTypeId}
+        )
+    </insert>
+</mapper>

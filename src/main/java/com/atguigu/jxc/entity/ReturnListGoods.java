@@ -5,7 +5,7 @@ import lombok.Data;
  * 退货商品
  */
 @Data
-public class ReturnListGoods {
+public class   ReturnListGoods {
 
   private Integer returnListGoodsId;
   private Integer goodsId;

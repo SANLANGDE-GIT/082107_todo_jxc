@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.atguigu.jxc.dao.ReturnListSaveDao">
+
+    <insert id="returnListSave" useGeneratedKeys="true" keyProperty="returnListId" parameterType="com.atguigu.jxc.entity.ReturnList">
+        INSERT INTO t_return_list
+            (
+            return_number,
+            return_date,
+            amount_paid,
+            amount_payable,
+            remarks,
+            state,
+            supplier_id,
+            user_id
+            )
+            VALUES
+            (
+            #{returnNumber},
+            #{returnDate},
+            #{amountPaid},
+            #{amountPayable},
+            #{remarks},
+            #{state},
+            #{supplierId},
+            #{userId}
+            )
+    </insert>
+</mapper>

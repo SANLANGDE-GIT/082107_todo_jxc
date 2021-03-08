@@ -1,12 +1,15 @@
 package com.atguigu.jxc.controller;
 
 import com.atguigu.jxc.domain.ServiceVO;
+import com.atguigu.jxc.domain.SuccessCode;
 import com.atguigu.jxc.entity.Supplier;
 import com.atguigu.jxc.service.SupplierService;
 import org.apache.shiro.authz.annotation.Logical;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -22,6 +25,12 @@ public class SupplierController {
     @Autowired
     private SupplierService supplierService;
 
+    @PostMapping("getComboboxList")
+    @RequiresPermissions(value = "进货管理")
+    public List<Supplier> getComboboxList(String q){
+        List<Supplier> supplier = this.supplierService.getComboboxList(q);
+        return supplier;
+    }
     /**
      * 分页查询供应商
      * @param page 当前页数
