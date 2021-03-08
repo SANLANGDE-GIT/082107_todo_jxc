@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.atguigu.jxc.dao.CustomerReturnListDao">
+
+    <resultMap id="queryReturnMap" type="com.atguigu.jxc.entity.ReturnList">
+        <result column="return_list_id" property="returnListId" />
+        <result column="return_number" property="returnNumber"/>
+        <result column="return_date" property="returnDate"/>
+        <result column="amount_paid" property="amountPaid"/>
+        <result column="amount_payable" property="amountPayable"/>
+        <result column="remarks" property="remarks"/>
+        <result column="state" property="state"/>
+        <result column="supplier_id" property="supplierId"/>
+        <result column="user_id" property="userId"/>
+        <result column="supplier_name" property="supplierName"/>
+        <result column="true_name" property="trueName"/>
+
+    </resultMap>
+    
+    <select id="queryReturn" resultMap="queryReturnMap">
+        SELECT tcrl.return_number,tcrl.return_Date,tcrl.amount_paid,
+        tcrl.amount_payable,tcrl.state,tcrl.customer_id,tcrl.user_id,
+        tcrl.remarks,tc.customer_name,tu.true_name
+        FROM t_customer_return_list tcrl
+        LEFT JOIN t_customer tc
+        ON tcrl.customer_id = tc.customer_id
+        LEFT JOIN t_user tu
+        ON tcrl.user_id = tu.user_id
+    </select>
+
+
+    <resultMap id="getGoodzMap" type="com.atguigu.jxc.domain.GoodsList">
+        <result property="customerReturnListGoodsId" column="customer_return_list_goods_id"/>
+        <result property="goodsId" column="goods_id"/>
+        <result property="goodsCode" column="goods_code"/>
+        <result property="goodsName" column="goods_name"/>
+        <result property="goodsModel" column="goods_model"/>
+        <result property="goodsNum" column="goods_num"/>
+        <result property="goodsUnit" column="goods_unit"/>
+        <result property="price" column="price"/>
+        <result property="total" column="total"/>
+        <result property="customerReturnListId" column="customer_return_list_id"/>
+        <result property="goodsTypeId" column="goods_type_id"/>
+    </resultMap>
+    <select id="getGoodz"  resultMap="getGoodzMap">
+         SELECT	 tcrlg.customer_return_list_goods_id ,tg.goods_id,tg.goods_code,tg.goods_name,
+	tg.goods_model,tcrlg.`goods_num`,tg.goods_unit,tcrlg.`price`,
+	tcrlg.`total`,tcrlg.customer_return_list_id,tcrlg.goods_type_id
+     FROM
+	t_customer_return_list_goods tcrlg
+    LEFT JOIN   t_goods tg
+    ON tcrlg.goods_id = tg.goods_id
+    WHERE tcrlg.customer_return_list_id = #{customerReturnListId}
+    </select>
+
+</mapper>
