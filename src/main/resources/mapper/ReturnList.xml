@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.atguigu.jxc.dao.ReturnListDao">
+
+    <resultMap id="BaseResultMap" type="com.atguigu.jxc.entity.ReturnList">
+        <result column="return_list_id" property="returnListId" jdbcType="INTEGER" />
+        <result column="return_number" property="returnNumber" jdbcType="VARCHAR" />
+        <result column="return_date" property="returnDate" jdbcType="VARCHAR" />
+        <result column="amount_paid" property="amountPaid" jdbcType="DOUBLE" />
+        <result column="amount_payable" property="amountPayable" jdbcType="DOUBLE" />
+        <result column="remarks" property="remarks" jdbcType="VARCHAR" />
+        <result column="state" property="state" jdbcType="INTEGER" />
+        <result column="supplier_id" property="supplierId" jdbcType="INTEGER" />
+        <result column="user_id" property="userId" jdbcType="INTEGER" />
+        <result column="supplier_name" property="supplierName" jdbcType="VARCHAR" />
+        <result column="true_name" property="trueName" jdbcType="VARCHAR" />
+    </resultMap>
+
+    <select id="list" resultMap="BaseResultMap">
+
+        select
+        t1.return_list_id,
+        t1.return_number,
+        t1.return_date,
+        t1.amount_paid,
+        t1.amount_payable,
+        t1.remarks,
+        t1.state,
+        t1.supplier_id,
+        t1.user_id,
+        t2.supplier_name,
+        t3.true_name
+        from t_return_list t1
+        LEFT JOIN t_supplier t2
+        on t1.supplier_id = t2.supplier_id
+        LEFT JOIN t_user t3
+        on t1.user_id = t3.user_id
+
+        <where>
+
+            <if test="returnNumber != null and returnNumber != ''">
+                AND t1.return_number LIKE CONCAT('%', #{returnNumber} ,'%')
+            </if>
+
+            <if test="supplierId != null and supplierId != ''">
+                AND t1.supplier_id = #{supplierId}
+            </if>
+
+            <if test="state != null and state != ''">
+                AND t1.state = #{state}
+            </if>
+
+            <if test="t1 != null and t1 != ''">
+                AND t1.return_date >= #{t1}
+            </if>
+
+            <if test="t2 != null and t2 != ''">
+                AND t1.return_date &lt;= #{t2}
+            </if>
+
+        </where>
+
+
+    </select>
+</mapper>
