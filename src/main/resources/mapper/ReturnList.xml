@@ -5,7 +5,7 @@
 
 <mapper namespace="com.atguigu.jxc.dao.ReturnListDao">
 
-    <resultMap id="BaseResultMap" type="com.atguigu.jxc.entity.ReturnList">
+    <resultMap id="ReturnListBaseResultMap" type="com.atguigu.jxc.entity.ReturnList">
         <result column="return_list_id" property="returnListId" jdbcType="INTEGER" />
         <result column="return_number" property="returnNumber" jdbcType="VARCHAR" />
         <result column="return_date" property="returnDate" jdbcType="VARCHAR" />
@@ -19,7 +19,7 @@
         <result column="true_name" property="trueName" jdbcType="VARCHAR" />
     </resultMap>
 
-    <select id="list" resultMap="BaseResultMap">
+    <select id="list" resultMap="ReturnListBaseResultMap">
 
         select
         t1.return_list_id,
@@ -63,6 +63,23 @@
 
         </where>
 
+
+    </select>
+    <select id="listGoods" resultType="com.atguigu.jxc.entity.PurchaseListGoods">
+        select
+            purchase_list_goods_id as purchaseListGoodsId,
+            goods_id as goodsId,
+            goods_code as goodsCode,
+            goods_name as goodsName,
+            goods_model as goodsModel,
+            goods_unit as goodsUnit,
+            goods_num as goodsNum,
+            price,
+            total,
+            purchase_list_id as purchaseListId,
+            goods_type_id as goodsTypeId
+        from t_purchase_list_goods
+        where purchase_list_id = #{returnListId}
 
     </select>
 </mapper>
