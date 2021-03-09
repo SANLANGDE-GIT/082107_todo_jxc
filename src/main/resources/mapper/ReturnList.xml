@@ -5,7 +5,7 @@
 
 <mapper namespace="com.atguigu.jxc.dao.ReturnListDao">
 
-    <resultMap id="BaseResultMap" type="com.atguigu.jxc.entity.ReturnList">
+    <resultMap id="ReturnListBaseResultMap" type="com.atguigu.jxc.entity.ReturnList">
         <result column="return_list_id" property="returnListId" jdbcType="INTEGER" />
         <result column="return_number" property="returnNumber" jdbcType="VARCHAR" />
         <result column="return_date" property="returnDate" jdbcType="VARCHAR" />
@@ -18,8 +18,14 @@
         <result column="supplier_name" property="supplierName" jdbcType="VARCHAR" />
         <result column="true_name" property="trueName" jdbcType="VARCHAR" />
     </resultMap>
+    <delete id="deleteReturnListGoods">
+        delete from t_return_list_goods where return_list_id = #{returnListId}
+    </delete>
+    <delete id="deleteReturnList">
+        delete from t_return_list where return_list_id = #{returnListId}
+    </delete>
 
-    <select id="list" resultMap="BaseResultMap">
+    <select id="list" resultMap="ReturnListBaseResultMap">
 
         select
         t1.return_list_id,
@@ -63,6 +69,23 @@
 
         </where>
 
+
+    </select>
+    <select id="listGoods" resultType="com.atguigu.jxc.entity.ReturnListGoods">
+        select
+            return_list_goods_id as returnListGoodsId,
+            goods_id as goodsId,
+            goods_code as goodsCode,
+            goods_name as goodsName,
+            goods_model as goodsModel,
+            goods_unit as goodsUnit,
+            goods_num as goodsNum,
+            price,
+            total,
+            return_list_id as returnListId,
+            goods_type_id as goodsTypeId
+        from t_return_list_goods
+        where return_list_id = #{returnListId}
 
     </select>
 </mapper>
