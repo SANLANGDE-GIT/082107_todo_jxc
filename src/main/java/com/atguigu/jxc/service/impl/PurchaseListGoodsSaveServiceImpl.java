@@ -26,9 +26,6 @@ public class PurchaseListGoodsSaveServiceImpl implements PurchaseListGoodsSaveSe
     private PurchaseListGoodsSaveDao purchaseListGoodsSaveDao;
 
     @Autowired
-    private GoodsService goodsService;
-
-    @Autowired
     private GoodsDao goodsDao;
 
     @Autowired

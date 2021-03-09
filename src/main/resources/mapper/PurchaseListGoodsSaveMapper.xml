@@ -6,7 +6,7 @@
 <mapper namespace="com.atguigu.jxc.dao.PurchaseListGoodsSaveDao">
 
 
-    <insert id="purchaseListGoodsSave" useGeneratedKeys="true" keyProperty="purchaseListId" parameterType="com.atguigu.jxc.entity.PurchaseListGoods">
+    <insert id="purchaseListGoodsSave" useGeneratedKeys="true" keyProperty="purchaseListGoodsId" parameterType="com.atguigu.jxc.entity.PurchaseListGoods">
         INSERT INTO t_purchase_list_goods
         (
             goods_id,
@@ -30,7 +30,7 @@
             #{goodsNum},
             #{price},
             #{total},
-            #{purchaseListGoodsId},
+            #{purchaseListId},
             #{goodsTypeId}
         )
     </insert>

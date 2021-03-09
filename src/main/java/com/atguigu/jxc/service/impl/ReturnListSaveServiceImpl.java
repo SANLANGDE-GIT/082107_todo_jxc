@@ -25,7 +25,7 @@ public class ReturnListSaveServiceImpl implements ReturnListSaveService {
     public ServiceVO returnListSave(ReturnList returnList, String returnListGoodsStr) {
         this.returnListSaveDao.returnListSave(returnList);
         Integer returnListId = returnList.getReturnListId();
-        if (!StringUtils.isEmpty(returnListGoodsStr) || returnListGoodsStr == null){
+        if (!StringUtils.isEmpty(returnListGoodsStr) && returnListGoodsStr != null){
             this.returnListGoodsSaveService.returnListGoodsSave(returnListGoodsStr,returnListId);
         }
         return  new ServiceVO(SuccessCode.SUCCESS_CODE,SuccessCode.SUCCESS_MESS);

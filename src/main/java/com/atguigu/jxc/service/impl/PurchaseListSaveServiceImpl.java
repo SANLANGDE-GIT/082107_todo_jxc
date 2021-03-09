@@ -29,10 +29,9 @@ public class  PurchaseListSaveServiceImpl implements PurchaseListSaveService {
 
         this.purchaseListSaveDao.purchaseListSave(purchaseList);
         Integer purchaseListId = purchaseList.getPurchaseListId();
-        if (!StringUtils.isEmpty(purchaseListGoodsStr) || purchaseList ==null){
+        if (!StringUtils.isEmpty(purchaseListGoodsStr) && purchaseList !=null){
             this.purchaseListGoodsSaveService.purchaseListGoodsSave(purchaseListGoodsStr,purchaseListId);
         }
-
         return  new ServiceVO(SuccessCode.SUCCESS_CODE,SuccessCode.SUCCESS_MESS);
     }
 }
