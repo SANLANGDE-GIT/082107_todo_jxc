@@ -11,6 +11,7 @@ import java.util.Date;
 @NoArgsConstructor
 public class Log {
 
+
   private Integer logId;
   private String logType;
   private String content;
