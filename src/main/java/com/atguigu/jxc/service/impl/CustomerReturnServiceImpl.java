@@ -1,11 +1,13 @@
 package com.atguigu.jxc.service.impl;
 
 import com.atguigu.jxc.dao.CustomerReturnDao;
+import com.atguigu.jxc.dao.GoodsDao;
 import com.atguigu.jxc.domain.ErrorCode;
 import com.atguigu.jxc.domain.ServiceVO;
 import com.atguigu.jxc.domain.SuccessCode;
 import com.atguigu.jxc.entity.CustomerReturnList;
 import com.atguigu.jxc.entity.CustomerReturnListGoods;
+import com.atguigu.jxc.entity.Goods;
 import com.atguigu.jxc.entity.SaleListGoods;
 import com.atguigu.jxc.interceptor.LoginInterceptor;
 import com.atguigu.jxc.service.CustomerReturnService;
@@ -24,6 +26,9 @@ public class CustomerReturnServiceImpl implements CustomerReturnService {
     @Autowired
     private CustomerReturnDao customerReturnDao;
 
+    @Autowired
+    private GoodsDao goodsDao;
+
     @Override
     @Transactional
     public ServiceVO saveCustomerReturn(CustomerReturnList customerReturnList, String customerReturnListGoodsStr) {
@@ -37,9 +42,19 @@ public class CustomerReturnServiceImpl implements CustomerReturnService {
         if (this.customerReturnDao.saveCustomerReturn(customerReturnList)>0) {
             this.customerReturnDao.saveCustomerReturnListGoods(customerReturnLists,customerReturnList.getCustomerReturnListId());
             //TODO:加库存
+            this.addGood(customerReturnLists);
             return new ServiceVO(SuccessCode.SUCCESS_CODE,SuccessCode.SUCCESS_MESS);
         }
 
         return null;
+    }
+
+    private void addGood(List<CustomerReturnListGoods> customerReturnListGoods) {
+        customerReturnListGoods.forEach(returnListGoods -> {
+            Goods goods = this.goodsDao.findByGoodsId(returnListGoods.getGoodsId());
+            Integer inventoryQuantity = goods.getInventoryQuantity();
+            goods.setInventoryQuantity(inventoryQuantity+returnListGoods.getGoodsNum());
+            this.goodsDao.updateGoods(goods);
+        });
     }
 }

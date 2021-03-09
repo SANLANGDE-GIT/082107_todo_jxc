@@ -7,6 +7,8 @@ import com.atguigu.jxc.domain.SuccessCode;
 import com.atguigu.jxc.entity.ReturnList;
 import com.atguigu.jxc.entity.ReturnListGoods;
 import com.atguigu.jxc.service.ReturnListService;
+import com.atguigu.jxc.vo.ReturnListGoodsVo;
+import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -51,5 +53,12 @@ public class ReturnListServiceImpl implements ReturnListService {
             System.out.println("操作数据库异常");
         }
         return new ServiceVO(ErrorCode.PARA_TYPE_ERROR_CODE,"删除失败！");
+    }
+
+    @Override
+    public String returnGoodCount(String sTime, String eTime, Integer goodsTypeId, String codeOrName) {
+        List<ReturnListGoodsVo> returnListGoodsVos = this.returnListDao.findReturnListGoodsVos(sTime,eTime,goodsTypeId,codeOrName);
+        Gson gson = new Gson();
+        return gson.toJson(returnListGoodsVos);
     }
 }

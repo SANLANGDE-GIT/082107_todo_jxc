@@ -88,4 +88,46 @@
         where return_list_id = #{returnListId}
 
     </select>
+    <select id="findReturnListGoodsVos" resultType="com.atguigu.jxc.vo.ReturnListGoodsVo">
+        select
+            t1.return_number as number,
+            t1.return_date as date,
+            t3.supplier_name as supplierName,
+            t2.goods_code as code,
+            t2.goods_name as name,
+            t2.goods_model as model,
+            t4.goods_type_name as goodsType,
+            t2.goods_unit as unit,
+            t2.price,
+            t2.goods_num,
+            t2.total
+
+
+        FROM t_return_list t1
+
+        LEFT JOIN t_return_list_goods t2 on t1.return_list_id = t2.return_list_id
+
+        LEFT JOIN t_goods_type t4 on t2.goods_type_id = t4.goods_type_id
+
+        LEFT JOIN t_supplier t3 ON t1.supplier_id = t3.supplier_id
+
+        <where>
+            <if test="start != null">
+                and t1.return_date >= #{start}
+            </if>
+            <if test="end != null">
+                AND t1.return_date &lt;= #{end}
+            </if>
+            <if test="goodsTypeId != null">
+                and t2.goods_type_id  #{goodsTypeId}
+            </if>
+            <if test="codeOrName != null">
+                and (
+                    t2.goods_code = #{codeOrName}
+                    or
+                    t2.goods_name like CONCAT('%',#{codeOrName},'%')
+                )
+            </if>
+        </where>
+    </select>
 </mapper>

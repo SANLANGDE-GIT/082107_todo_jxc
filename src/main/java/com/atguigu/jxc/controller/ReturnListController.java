@@ -15,6 +15,12 @@ public class ReturnListController {
     @Autowired
     private ReturnListService returnListService;
 
+    @PostMapping("returnListGoods/count")
+    @RequiresPermissions("商品采购统计")
+    public String returnGoodCount(String sTime, String eTime ,Integer goodsTypeId, String codeOrName){
+        return this.returnListService.returnGoodCount(sTime, eTime, goodsTypeId, codeOrName);
+    }
+
     /**
      * 退货单列表展示
      * @param returnNumber 退货单号

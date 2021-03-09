@@ -3,6 +3,7 @@ package com.atguigu.jxc.dao;
 import com.atguigu.jxc.entity.PurchaseListGoods;
 import com.atguigu.jxc.entity.ReturnList;
 import com.atguigu.jxc.entity.ReturnListGoods;
+import com.atguigu.jxc.vo.ReturnListGoodsVo;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -20,4 +21,9 @@ public interface ReturnListDao {
     Integer deleteReturnListGoods(@Param("returnListId") Integer returnListId);
 
     Integer deleteReturnList(@Param("returnListId") Integer returnListId);
+
+    List<ReturnListGoodsVo> findReturnListGoodsVos(@Param("start") String sTime,
+                                                   @Param("end") String eTime,
+                                                   @Param("goodsTypeId") Integer goodsTypeId,
+                                                   @Param("codeOrName") String codeOrName);
 }
