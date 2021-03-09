@@ -38,6 +38,7 @@ public class ReturnListController {
     }
 
     @PostMapping("returnListGoods/delete")
+    @RequiresPermissions("退货单据查询")
     public ServiceVO deleteReturnList(Integer returnListId){
         return returnListService.deleteReturnList(returnListId);
     }
