@@ -1,5 +1,6 @@
 package com.atguigu.jxc.controller;
 
+import com.atguigu.jxc.domain.ServiceVO;
 import com.atguigu.jxc.service.ReturnListService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,6 +37,10 @@ public class ReturnListController {
         return returnListService.listGoods(returnListId);
     }
 
+    @PostMapping("returnListGoods/delete")
+    public ServiceVO deleteReturnList(Integer returnListId){
+        return returnListService.deleteReturnList(returnListId);
+    }
 
 
 }

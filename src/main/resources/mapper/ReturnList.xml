@@ -18,6 +18,12 @@
         <result column="supplier_name" property="supplierName" jdbcType="VARCHAR" />
         <result column="true_name" property="trueName" jdbcType="VARCHAR" />
     </resultMap>
+    <delete id="deleteReturnListGoods">
+        delete from t_return_list_goods where return_list_id = #{returnListId}
+    </delete>
+    <delete id="deleteReturnList">
+        delete from t_return_list where return_list_id = #{returnListId}
+    </delete>
 
     <select id="list" resultMap="ReturnListBaseResultMap">
 
@@ -65,9 +71,9 @@
 
 
     </select>
-    <select id="listGoods" resultType="com.atguigu.jxc.entity.PurchaseListGoods">
+    <select id="listGoods" resultType="com.atguigu.jxc.entity.ReturnListGoods">
         select
-            purchase_list_goods_id as purchaseListGoodsId,
+            return_list_goods_id as returnListGoodsId,
             goods_id as goodsId,
             goods_code as goodsCode,
             goods_name as goodsName,
@@ -76,10 +82,10 @@
             goods_num as goodsNum,
             price,
             total,
-            purchase_list_id as purchaseListId,
+            return_list_id as returnListId,
             goods_type_id as goodsTypeId
-        from t_purchase_list_goods
-        where purchase_list_id = #{returnListId}
+        from t_return_list_goods
+        where return_list_id = #{returnListId}
 
     </select>
 </mapper>
