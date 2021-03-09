@@ -85,6 +85,22 @@
         WHERE
             customer_id = #{customerId}
     </select>
+    <select id="customerList" resultType="com.atguigu.jxc.entity.Customer">
+        SELECT
+            t_customer.customer_id as customerId,
+            t_customer.customer_name as customerName,
+            t_customer.contacts,
+            t_customer.phone_number as phoneNumber,
+            t_customer.address,
+            t_customer.remarks
+        FROM
+            t_customer
+        <where>
+            <if test="customerName !=null and customerName != ''">
+                customer_name LIKE CONCAT('', #{customerName} ,'%')
+            </if>
+        </where>
+    </select>
 
     <delete id="deleteCustomer" parameterType="java.lang.Integer">
         DELETE FROM

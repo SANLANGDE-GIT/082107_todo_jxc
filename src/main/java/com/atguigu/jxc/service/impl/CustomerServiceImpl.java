@@ -7,6 +7,7 @@ import com.atguigu.jxc.entity.Customer;
 import com.atguigu.jxc.entity.Log;
 import com.atguigu.jxc.service.CustomerService;
 import com.atguigu.jxc.service.LogService;
+import com.atguigu.jxc.util.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -75,6 +76,11 @@ public class CustomerServiceImpl implements CustomerService {
         }
 
         return new ServiceVO<>(SuccessCode.SUCCESS_CODE, SuccessCode.SUCCESS_MESS);
+    }
+
+    @Override
+    public List<Customer> customerList(String q) {
+        return this.customerDao.customerList(q);
     }
 
 }

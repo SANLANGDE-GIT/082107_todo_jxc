@@ -4,7 +4,6 @@ import com.atguigu.jxc.dao.ReturnListDao;
 import com.atguigu.jxc.domain.ErrorCode;
 import com.atguigu.jxc.domain.ServiceVO;
 import com.atguigu.jxc.domain.SuccessCode;
-import com.atguigu.jxc.entity.PurchaseListGoods;
 import com.atguigu.jxc.entity.ReturnList;
 import com.atguigu.jxc.entity.ReturnListGoods;
 import com.atguigu.jxc.service.ReturnListService;
