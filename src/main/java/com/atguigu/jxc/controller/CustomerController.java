@@ -57,4 +57,9 @@ public class CustomerController {
     public ServiceVO delete(String ids) {
         return customerService.delete(ids);
     }
+
+    @PostMapping("getComboboxList")
+    public List<Customer> customerList (String q){
+        return this.customerService.customerList(q);
+    }
 }

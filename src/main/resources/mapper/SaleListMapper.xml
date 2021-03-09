@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.atguigu.jxc.dao.SaleListDao">
+
+    <insert id="saveSale" useGeneratedKeys="true" keyProperty="saleListId" parameterType="com.atguigu.jxc.entity.SaleList">
+        INSERT INTO t_sale_list
+        (
+            sale_number ,
+            amount_paid,
+            amount_payable,
+            sale_date,
+            state,
+            remarks,
+            customer_id,
+            user_id
+        )
+        VALUES
+        (
+            #{saleNumber},
+            #{amountPaid},
+            #{amountPayable},
+            #{saleDate},
+            #{state},
+            #{remarks},
+            #{customerId},
+            #{userId}
+        )
+    </insert>
+    <insert id="saveSaleListGoods" parameterType="com.atguigu.jxc.entity.SaleListGoods">
+        insert into
+        t_sale_list_goods (
+        goods_id,
+        goods_code,
+        goods_name,
+        goods_model,
+        goods_num,
+        goods_unit,
+        price,
+        total,
+        sale_list_id,
+        goods_type_id
+        )
+        values
+        <foreach collection="list" item="saleListGoods" separator=",">
+            (
+            #{saleListGoods.goodsId} ,
+            #{saleListGoods.goodsCode} ,
+            #{saleListGoods.goodsName} ,
+            #{saleListGoods.goodsModel} ,
+            #{saleListGoods.goodsNum} ,
+            #{saleListGoods.goodsUnit} ,
+            #{saleListGoods.price} ,
+            #{saleListGoods.total} ,
+            #{saleListId} ,
+            #{saleListGoods.goodsTypeId}
+            )
+        </foreach>
+    </insert>
+</mapper>
