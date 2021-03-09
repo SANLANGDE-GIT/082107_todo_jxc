@@ -1,6 +1,8 @@
 package com.atguigu.jxc.service.impl;
 
 import com.atguigu.jxc.dao.SaleListGoodsDao;
+import com.atguigu.jxc.domain.ServiceVO;
+import com.atguigu.jxc.domain.SuccessCode;
 import com.atguigu.jxc.entity.Log;
 import com.atguigu.jxc.entity.SaleList;
 import com.atguigu.jxc.entity.SaleListGoods;
@@ -23,22 +25,6 @@ public class SaleListGoodsServiceImpl implements SaleListGoodsService {
     private SaleListGoodsDao saleListGoodsDao;
 
 
-
-
-    //        {
-//            "saleListId": 7,
-//                "saleNumber": "XS1605773500926",
-//                "amountPaid": 1900,
-//                "amountPayable": 1900,
-//                "saleDate": "2020-11-19",
-//                "state": 1,
-//                "remarks": "",
-//                "customerId": 1,
-//                "userId": 1,
-//                "customerName": "家乐福（青石桥店）",
-//                "trueName": "兰杰"
-//        },
-
     @Override
     public Map<String, Object> saleListGoodsList(String saleNumber, Integer customerId, Integer state, String sTime, String eTime) {
 
@@ -60,5 +46,16 @@ public class SaleListGoodsServiceImpl implements SaleListGoodsService {
         map.put("rows",saleListId);
         map.put("rows",saleGoods);
         return map;
+    }
+
+        @Override
+        public ServiceVO deleteSaleListGoods(Integer saleListId) {
+
+        logService.save(new Log(Log.SELECT_ACTION,"删除销售单商品信息"));
+
+            saleListGoodsDao.deleteSaleListGoods(saleListId);
+
+        return new ServiceVO<>(SuccessCode.SUCCESS_CODE, SuccessCode.SUCCESS_MESS);
+
     }
 }

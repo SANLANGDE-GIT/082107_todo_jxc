@@ -27,4 +27,5 @@ public class ServiceVO<T> implements Serializable {
         this.info = info;
     }
 
+
 }
