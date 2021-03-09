@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.atguigu.jxc.dao.PurchaseListGoodsDao">
+
+    <update id="updateState" parameterType="java.lang.Integer">
+         update t_purchase_list
+         <set>
+             <if test="state !='' and state != null">
+                 state = #{state},
+             </if>
+         </set>
+         where  purchase_list_id = #{purchaseListId}
+    </update>
+</mapper>

@@ -43,7 +43,12 @@ public class SaleListGoodsController {
 
         return saleListGoodsService.saleListGoodsList(saleNumber, customerId, state, sTime, eTime);
     }
-
+    /**
+     * 销售单据查询
+     *
+     * @param saleListId  销售单id，主键
+     * @return
+     */
     @PostMapping("/goodsList")
     @RequiresPermissions(value = "销售单据查询")
     public Map<String, Object> saleListGoodsGoodsList(@RequestParam(value = "saleListId") Integer saleListId) {
@@ -54,7 +59,7 @@ public class SaleListGoodsController {
     /**
      * 删除销售单
      *
-     * @param saleListId
+     * @param saleListId  销售单id，主键
      * @return
      */
     @PostMapping("/delete")

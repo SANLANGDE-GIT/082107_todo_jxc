@@ -84,16 +84,4 @@
         where sale_list_id = #{saleListId}
     </delete>
 
-    <select id="getSaleListId" resultType="com.atguigu.jxc.entity.Unit">
-            select
-            sale_list_id,
-            customer_name
-        from
-            t_sale_list t1
-         left join  t_customer t2
-         on
-         t1.`customer_id`=t2.`customer_id`
-
-        where sale_list_id ={saleListId}
-    </select>
 </mapper>
