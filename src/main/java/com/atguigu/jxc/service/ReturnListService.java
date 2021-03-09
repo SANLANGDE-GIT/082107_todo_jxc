@@ -1,5 +1,7 @@
 package com.atguigu.jxc.service;
 
+import com.atguigu.jxc.domain.ServiceVO;
+
 import java.util.Map;
 
 public interface ReturnListService {
@@ -7,4 +9,5 @@ public interface ReturnListService {
 
     Map<String, Object> listGoods(Integer returnListId);
 
+    ServiceVO deleteReturnList(Integer returnListId);
 }
