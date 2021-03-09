@@ -1,6 +1,8 @@
 package com.atguigu.jxc.service.impl;
 
 import com.atguigu.jxc.dao.CustomerReturnListDao;
+import com.atguigu.jxc.domain.ServiceVO;
+import com.atguigu.jxc.domain.SuccessCode;
 import com.atguigu.jxc.entity.Log;
 import com.atguigu.jxc.service.CustomerReturnListGoodsService;
 import com.atguigu.jxc.service.LogService;
@@ -36,9 +38,10 @@ public class CustomerReturnListGoodsServiceImpl implements CustomerReturnListGoo
     }
 
     @Override
-    public Integer deleteReturnListBycustomerReturnListId(Integer customerReturnListId) {
+    public ServiceVO deleteReturnListBycustomerReturnListId(Integer customerReturnListId) {
         logService.save(new Log(Log.DELETE_ACTION,
                 "删除客户:" + customerReturnListDao.getCustomerByCustomerReturnListId(customerReturnListId)));
-        return customerReturnListDao.delete(customerReturnListId);
+        customerReturnListDao.delete(customerReturnListId);
+        return new ServiceVO<>(SuccessCode.SUCCESS_CODE, SuccessCode.SUCCESS_MESS);
     }
 }

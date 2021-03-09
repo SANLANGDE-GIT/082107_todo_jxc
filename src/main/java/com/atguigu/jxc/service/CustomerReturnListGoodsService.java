@@ -1,5 +1,7 @@
 package com.atguigu.jxc.service;
 
+import com.atguigu.jxc.domain.ServiceVO;
+
 import java.util.Map;
 
 public interface CustomerReturnListGoodsService {
@@ -9,5 +11,5 @@ public interface CustomerReturnListGoodsService {
 
     Map<String, Object> goodsList(Integer customerReturnListId);
 
-    Integer deleteReturnListBycustomerReturnListId(Integer customerReturnListId);
+    ServiceVO deleteReturnListBycustomerReturnListId(Integer customerReturnListId);
 }

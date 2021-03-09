@@ -46,11 +46,7 @@ public class CustomerReturnListGoods {
 
     @PostMapping("/delete")
     public ServiceVO deleteReturnList(Integer customerReturnListId){
-         Integer  i = goodsService.deleteReturnListBycustomerReturnListId(customerReturnListId);
-         if(i>0){
-             return new ServiceVO(0,"删除成功");
-         }else {
-             return new ServiceVO(0,"删除失败");
-         }
+         return goodsService.deleteReturnListBycustomerReturnListId(customerReturnListId);
+         //return new ServiceVO(0,"删除成功");
     }
 }
