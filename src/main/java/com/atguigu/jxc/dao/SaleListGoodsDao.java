@@ -18,8 +18,7 @@ public interface SaleListGoodsDao {
     List<SaleListGoods> getSaleListGoodsGoods(@Param("saleListId") Integer saleListId);
 
 
-    List<SaleListGoods> deleteSaleListGoods(@Param("saleListId") Integer saleListId);
+    Integer deleteSaleListGoods(@Param("saleListId") Integer saleListId);
 
-    Unit getSaleListId(@Param("saleListId") Integer saleListId);
 
 }
